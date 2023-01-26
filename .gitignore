@@ -1,0 +1,12 @@
+*.xo
+*.xclbin
+*.exe
+*.compile_summary
+*.link_summary
+*.info
+*.log
+all_builds
+all_logs
+emconfig.json
+.Xil
+.run
