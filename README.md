@@ -1,4 +1,7 @@
 # Santiy checker for Zhang group Vitis tools # 
+This design is taken from the official example from Xilinx(AMD):
+[Vitis HLS Introductory Examples](https://github.com/Xilinx/Vitis-HLS-Introductory-Examples/tree/master/Vitis/single_kernel)
+
 
 ## 1.  Setup Envrionments ##
 * `brg-zhang-xcel`:<br>
