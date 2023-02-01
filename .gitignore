@@ -10,3 +10,5 @@ all_logs
 emconfig.json
 .Xil
 .run
+ext_metadata.json
+xsa.xml

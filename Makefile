@@ -18,7 +18,7 @@ VPP_OPTS += --temp_dir ./all_builds/$(TARGET)
 VPP_OPTS += --report_dir ./all_logs/$(TARGET)
 VPP_OPTS += --log_dir ./all_logs/$(TARGET)
 
-CFLAGS := -g -std=c++1y -I$(XILINX_XRT)/include 
+CFLAGS := -g -std=c++1y -I$(XILINX_XRT)/include
 LFLAGS := -L$(XILINX_XRT)/lib -lOpenCL -lxrt_coreutil -lrt -luuid
 
 # run time args
@@ -28,26 +28,27 @@ CMD_ARGS:= kernel.${TARGET}.xclbin
 .PHONY: xclbin host all
 
 xclbin:  $(XCLBIN)
-host: $(HOST_EXE) 
+host: $(HOST_EXE)
 
-all: xclbin host 
+all: xclbin host
 
 clean:
-	-$(RM) $(EMCONFIG_FILE) $(HOST_EXE) $(XCLBIN) 
+	-$(RM) $(EMCONFIG_FILE) $(HOST_EXE) $(XCLBIN)
 
-cleanall: clean	
-	rm -rf all_* *.log *.xclbin *.compile_summary *.link_summary *.info *.xo
+cleanall: clean
+	rm -rf all_* *.log *.xclbin *.compile_summary *.link_summary *.info *.xo .run .Xil
+	rm -rf ext_metadata.json xsa.xml
 
 # kernel rules
 $(KRNL_XO): ./vadd_kernel/krnl_vadd.cpp
 	$(RM) $@
 	$(VPP) $(VPP_OPTS) -c -k krnl_vadd -I'$(<D)' -o $@ $+
 
-$(XCLBIN): $(KRNL_XO) 
-	$(VPP) $(VPP_OPTS) -l -o $@ $(KRNL_XO) $+ 
+$(XCLBIN): $(KRNL_XO)
+	$(VPP) $(VPP_OPTS) -l -o $@ $(KRNL_XO) $+
 
 # host rules
-$(HOST_EXE): ./host/host.cpp 
+$(HOST_EXE): ./host/host.cpp
 	g++ $(CFLAGS) -o $@ $+ $(LFLAGS)
 	@echo 'Compiled Host Executable: $(HOST_EXE)'
 
