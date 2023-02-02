@@ -10,5 +10,8 @@ all_logs
 emconfig.json
 .Xil
 .run
+.ipcache
 ext_metadata.json
 xsa.xml
+*.hw.ltx
+.vscode
