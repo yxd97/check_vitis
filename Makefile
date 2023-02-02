@@ -22,7 +22,7 @@ CFLAGS := -g -std=c++1y -I$(XILINX_XRT)/include
 LFLAGS := -L$(XILINX_XRT)/lib -lOpenCL -lxrt_coreutil -lrt -luuid
 
 # run time args
-CMD_ARGS:= kernel.${TARGET}.xclbin
+CMD_ARGS:= kernel.${TARGET}.xclbin $(TARGET)
 
 # primary build targets
 .PHONY: xclbin host all
@@ -56,4 +56,4 @@ $(EMCONFIG_FILE):
 	$(EMCONFIGUTIL) --nd 1 --od . --platform $(DEVICE)
 
 run: $(XCLBIN) $(HOST_EXE) $(EMCONFIG_FILE)
-	XCL_EMULATION_MODE=${TARGET} ./$(HOST_EXE) $(CMD_ARGS)
+	./$(HOST_EXE) $(CMD_ARGS)

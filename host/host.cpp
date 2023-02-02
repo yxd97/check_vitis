@@ -15,7 +15,10 @@
 */
 
 #include <iostream>
+#include <string>
 #include <cstring>
+#include <vector>
+#include <cstdlib>
 
 // XRT includes
 #include "experimental/xrt_bo.h"
@@ -24,27 +27,77 @@
 
 #define DATA_SIZE 4096
 
+std::string DEVICE_NAME = "xilinx_u280_gen3x16_xdma_base_1";
+
 int main(int argc, char** argv) {    
 
     // Read settings
-    std::string binaryFile = argv[1]; 
-    int device_index = 0;
-
-    if (argc != 2) {
-        std::cout << "Usage: " << argv[0] << " <XCLBIN File>" << std::endl;
-        return EXIT_FAILURE;
+    if (argc != 3) {
+        std::cout << "[INFO]: Usage: " << argv[0] << " <XCLBIN File> <target>" << std::endl;
+        exit(EXIT_FAILURE);
     }
 
-    std::cout << "Open the device" << device_index << std::endl;
-    auto device = xrt::device(device_index);
-    std::cout << "Load the xclbin " << binaryFile << std::endl;
+    // set emulation environment 
+    std::string target = argv[2];
+    if (target == "sw_emu" || target == "hw_emu") {
+        setenv("XCL_EMULATION_MODE", target.c_str(), true);
+    } else if (target == "hw") {
+        unsetenv("XCL_EMULATION_MODE");
+    } else {
+        std::cout << "[INFO]: invalid target " << target << '\n';
+        std::cout << "        possible values: sw_emu, hw_emu, hw" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    // find the correct device
+    std::cout << "[INFO]: Scanning installed devices to locate " << DEVICE_NAME << std::endl;
+    bool found_device = false;
+    int device_idx = 0;
+    std::vector<std::string> avail_devices;
+    for (int i = 0; ; i++) {
+        try {
+            auto device = xrt::device(i); 
+            if (device.get_info<xrt::info::device::name>() == DEVICE_NAME) {
+                std::cout << "        Found device at index " << i << std::endl;
+                std::cout << "        Scan finished at index " << i << std::endl;
+                found_device = true;
+                device_idx = i;
+                break;
+            } else {
+                avail_devices.push_back(device.get_info<xrt::info::device::name>());
+            }
+        }
+        catch(const std::runtime_error& e) {
+            std::string err_info = e.what();
+            if (err_info.find("Could not open device with index")) {
+                std::cout << "[ERROR]: Scan aborted due to std::runtime_error at index " << i << std::endl;
+                std::cout << "         std::runtime_error: " << err_info << std::endl;
+                break;
+            }
+        }
+    }
+    if (!found_device) {
+        std::cout << "[ERROR]: Failed to find " << DEVICE_NAME << std::endl;
+        std::cout << "[INFO]: available devices:\n";
+        for (auto &&dev : avail_devices) {
+            std::cout << "        " << dev << '\n';
+        }
+        std::cout << "[INFO]: Aborting host program" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    std::cout << "[INFO]: Opening device " << device_idx << std::endl;
+    auto device = xrt::device(device_idx);
+    
+    // load xclbin
+    std::string binaryFile = argv[1]; 
+    std::cout << "[INFO]: Loading " << binaryFile << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 
     size_t vector_size_bytes = sizeof(int) * DATA_SIZE;
 
     auto krnl = xrt::kernel(device, uuid, "krnl_vadd");
 
-    std::cout << "Allocate Buffer in Global Memory\n";
+    std::cout << "[INFO]: Allocate Buffer in Global Memory\n";
     auto bo0 = xrt::bo(device, vector_size_bytes, krnl.group_id(0));
     auto bo1 = xrt::bo(device, vector_size_bytes, krnl.group_id(1));
     auto bo_out = xrt::bo(device, vector_size_bytes, krnl.group_id(2));
@@ -66,23 +119,23 @@ int main(int argc, char** argv) {
     }
 
     // Synchronize buffer content with device side
-    std::cout << "synchronize input buffer data to device global memory\n";
+    std::cout << "[INFO]: Synchronize input buffer data to device global memory\n";
 
     bo0.sync(XCL_BO_SYNC_BO_TO_DEVICE);
     bo1.sync(XCL_BO_SYNC_BO_TO_DEVICE);
 
-    std::cout << "Execution of the kernel\n";
+    std::cout << "[INFO]: Execution of the kernel\n";
     auto run = krnl(bo0, bo1, bo_out, DATA_SIZE);
     run.wait();
 
     // Get the output;
-    std::cout << "Get the output data from the device" << std::endl;
+    std::cout << "[INFO]: Get the output data from the device" << std::endl;
     bo_out.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
 
     // Validate our results
     if (std::memcmp(bo_out_map, bufReference, DATA_SIZE))
-        throw std::runtime_error("Value read back does not match reference");
+        throw std::runtime_error("[ERROR]: Value read back does not match reference");
 
-    std::cout << "TEST PASSED\n";
+    std::cout << "[INFO]: TEST PASSED" << std::endl;
     return 0;
 }
