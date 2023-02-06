@@ -29,7 +29,7 @@
 
 std::string DEVICE_NAME = "xilinx_u280_gen3x16_xdma_base_1";
 
-int main(int argc, char** argv) {    
+int main(int argc, char** argv) {
 
     // Read settings
     if (argc != 3) {
@@ -37,10 +37,11 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    // set emulation environment 
+    // set emulation environment
     std::string target = argv[2];
     if (target == "sw_emu" || target == "hw_emu") {
         setenv("XCL_EMULATION_MODE", target.c_str(), true);
+        std::cout << "[INFO]: XCL_EMULATION_MODE is set to " << getenv("XCL_EMULATION_MODE") << std::endl;;
     } else if (target == "hw") {
         unsetenv("XCL_EMULATION_MODE");
     } else {
@@ -50,46 +51,50 @@ int main(int argc, char** argv) {
     }
 
     // find the correct device
-    std::cout << "[INFO]: Scanning installed devices to locate " << DEVICE_NAME << std::endl;
     bool found_device = false;
     int device_idx = 0;
-    std::vector<std::string> avail_devices;
-    for (int i = 0; ; i++) {
-        try {
-            auto device = xrt::device(i); 
-            if (device.get_info<xrt::info::device::name>() == DEVICE_NAME) {
-                std::cout << "        Found device at index " << i << std::endl;
-                std::cout << "        Scan finished at index " << i << std::endl;
-                found_device = true;
-                device_idx = i;
-                break;
-            } else {
-                avail_devices.push_back(device.get_info<xrt::info::device::name>());
+    if (target == "hw") {
+        std::cout << "[INFO]: Scanning installed devices to locate " << DEVICE_NAME << std::endl;
+        std::vector<std::string> avail_devices;
+        for (int i = 0; ; i++) {
+            try {
+                auto device = xrt::device(i);
+                if (device.get_info<xrt::info::device::name>() == DEVICE_NAME) {
+                    std::cout << "        Found device at index " << i << std::endl;
+                    std::cout << "        Scan finished at index " << i << std::endl;
+                    found_device = true;
+                    device_idx = i;
+                    break;
+                } else {
+                    avail_devices.push_back(device.get_info<xrt::info::device::name>());
+                }
+            }
+            catch(const std::runtime_error& e) {
+                std::string err_info = e.what();
+                if (err_info.find("Could not open device with index")) {
+                    std::cout << "[ERROR]: Scan aborted due to std::runtime_error at index " << i << std::endl;
+                    std::cout << "         std::runtime_error: " << err_info << std::endl;
+                    break;
+                }
             }
         }
-        catch(const std::runtime_error& e) {
-            std::string err_info = e.what();
-            if (err_info.find("Could not open device with index")) {
-                std::cout << "[ERROR]: Scan aborted due to std::runtime_error at index " << i << std::endl;
-                std::cout << "         std::runtime_error: " << err_info << std::endl;
-                break;
+        if (!found_device) {
+            std::cout << "[ERROR]: Failed to find " << DEVICE_NAME << std::endl;
+            std::cout << "[INFO]: available devices:\n";
+            for (auto &&dev : avail_devices) {
+                std::cout << "        " << dev << '\n';
             }
+            std::cout << "[INFO]: Aborting host program" << std::endl;
+            exit(EXIT_FAILURE);
         }
+        std::cout << "[INFO]: Opening device " << device_idx << std::endl;
+    } else {
+        std::cout << "[INFO]: Device scanning skipped for emulation." << std::endl;
     }
-    if (!found_device) {
-        std::cout << "[ERROR]: Failed to find " << DEVICE_NAME << std::endl;
-        std::cout << "[INFO]: available devices:\n";
-        for (auto &&dev : avail_devices) {
-            std::cout << "        " << dev << '\n';
-        }
-        std::cout << "[INFO]: Aborting host program" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-    std::cout << "[INFO]: Opening device " << device_idx << std::endl;
     auto device = xrt::device(device_idx);
-    
+
     // load xclbin
-    std::string binaryFile = argv[1]; 
+    std::string binaryFile = argv[1];
     std::cout << "[INFO]: Loading " << binaryFile << std::endl;
     auto uuid = device.load_xclbin(binaryFile);
 

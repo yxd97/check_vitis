@@ -1,7 +1,8 @@
 VPP := $(XILINX_VITIS)/bin/v++
 EMCONFIGUTIL := $(XILINX_VITIS)/bin/emconfigutil
 TARGET:= sw_emu
-DEVICE:= /opt/xilinx/platforms/xilinx_u280_gen3x16_xdma_1_202211_1/xilinx_u280_gen3x16_xdma_1_202211_1.xpfm
+PLATFORM:=/opt/xilinx/platforms/xilinx_u280_gen3x16_xdma_1_202211_1/xilinx_u280_gen3x16_xdma_1_202211_1.xpfm
+DEVICE:=xilinx_u280_gen3x16_xdma_1_202211_1
 
 # kernel targets
 KRNL_XO := kernel.$(TARGET).xo
@@ -13,7 +14,7 @@ HOST_EXE := host.exe
 # config files target
 EMCONFIG_FILE := emconfig.json
 
-VPP_OPTS := -s -t $(TARGET) --platform $(DEVICE)
+VPP_OPTS := -s -t $(TARGET) --platform $(PLATFORM)
 VPP_OPTS += --temp_dir ./all_builds/$(TARGET)
 VPP_OPTS += --report_dir ./all_logs/$(TARGET)
 VPP_OPTS += --log_dir ./all_logs/$(TARGET)
@@ -50,10 +51,9 @@ $(XCLBIN): $(KRNL_XO)
 # host rules
 $(HOST_EXE): ./host/host.cpp
 	g++ $(CFLAGS) -o $@ $+ $(LFLAGS)
-	@echo 'Compiled Host Executable: $(HOST_EXE)'
 
 $(EMCONFIG_FILE):
-	$(EMCONFIGUTIL) --nd 1 --od . --platform $(DEVICE)
+	$(EMCONFIGUTIL) --platform $(DEVICE)
 
 run: $(XCLBIN) $(HOST_EXE) $(EMCONFIG_FILE)
 	./$(HOST_EXE) $(CMD_ARGS)
