@@ -1,0 +1,70 @@
+VPP := $(XILINX_VITIS)/bin/v++
+EMCONFIGUTIL := $(XILINX_VITIS)/bin/emconfigutil
+TARGET:= sw_emu
+PLATFORM:=/opt/xilinx/platforms/xilinx_u280_gen3x16_xdma_1_202211_1/xilinx_u280_gen3x16_xdma_1_202211_1.xpfm
+DEVICE:=xilinx_u280_gen3x16_xdma_1_202211_1
+
+HOST_ARCH:=x86
+
+# kernel targets
+KRNL_XO := kernel.$(TARGET).xo
+XCLBIN := kernel.$(TARGET).xclbin
+
+# host target
+HOST_EXE := host.exe
+
+# config files target
+EMCONFIG_FILE := emconfig.json
+
+VPP_OPTS := -s -t $(TARGET) --platform $(PLATFORM)
+VPP_OPTS += --temp_dir ./all_builds/$(TARGET)
+VPP_OPTS += --report_dir ./all_logs/$(TARGET)
+VPP_OPTS += --log_dir ./all_logs/$(TARGET)
+
+CFLAGS := -g -std=c++1y -I$(XILINX_XRT)/include
+LFLAGS := -L$(XILINX_XRT)/lib -lOpenCL -lxrt_coreutil -lrt -luuid
+
+# opencl and xcl2 includes
+include ./xcl2/xcl2.mk
+CFLAGS += $(xcl2_CXXFLAGS)
+LFLAGS += $(xcl2_LDFLAGS)
+
+include ./opencl/opencl.mk
+CFLAGS += $(opencl_CXXFLAGS)
+LFLAGS += $(opencl_LDFLAGS)
+
+# run time args
+CMD_ARGS:= kernel.${TARGET}.xclbin $(TARGET)
+
+# primary build targets
+.PHONY: xclbin host all
+
+xclbin:  $(XCLBIN)
+host: $(HOST_EXE)
+
+all: xclbin host
+
+clean:
+	-$(RM) $(EMCONFIG_FILE) $(HOST_EXE) $(XCLBIN)
+
+cleanall: clean
+	rm -rf all_* *.log *.xclbin *.compile_summary *.link_summary *.info *.xo .run .Xil .ipcache
+	rm -rf ext_metadata.json xsa.xml
+
+# kernel rules
+$(KRNL_XO): ./vadd_kernel/krnl_vadd.cpp
+	$(RM) $@
+	$(VPP) $(VPP_OPTS) -c -k krnl_vadd -I'$(<D)' -o $@ $+
+
+$(XCLBIN): $(KRNL_XO)
+	$(VPP) $(VPP_OPTS) -l -o $@ $(KRNL_XO) $+
+
+# host rules
+$(HOST_EXE): ./host/host.cpp
+	g++ $(CFLAGS) -o $@ $+ $(xcl2_SRCS) $(LFLAGS)
+
+$(EMCONFIG_FILE):
+	$(EMCONFIGUTIL) --platform $(DEVICE)
+
+run: $(XCLBIN) $(HOST_EXE) $(EMCONFIG_FILE)
+	./$(HOST_EXE) $(CMD_ARGS)

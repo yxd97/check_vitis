@@ -28,6 +28,7 @@
 #define DATA_SIZE 4096
 
 std::string DEVICE_NAME = "xilinx_u280_gen3x16_xdma_base_1";
+// std::string DEVICE_NAME = "xxy";
 
 int main(int argc, char** argv) {
 
@@ -56,11 +57,11 @@ int main(int argc, char** argv) {
     if (target == "hw") {
         std::cout << "[INFO]: Scanning installed devices to locate " << DEVICE_NAME << std::endl;
         std::vector<std::string> avail_devices;
-        for (int i = 0; ; i++) {
+        for (int i = 0; i < 10 ; i++) {
             try {
                 auto device = xrt::device(i);
                 if (device.get_info<xrt::info::device::name>() == DEVICE_NAME) {
-                    std::cout << "        Found device at index " << i << std::endl;
+                    std::cout << "        Found device" << device.get_info<xrt::info::device::name>() <<  "at index " << i << std::endl;
                     std::cout << "        Scan finished at index " << i << std::endl;
                     found_device = true;
                     device_idx = i;
@@ -71,11 +72,9 @@ int main(int argc, char** argv) {
             }
             catch(const std::runtime_error& e) {
                 std::string err_info = e.what();
-                if (err_info.find("Could not open device with index")) {
-                    std::cout << "[ERROR]: Scan aborted due to std::runtime_error at index " << i << std::endl;
-                    std::cout << "         std::runtime_error: " << err_info << std::endl;
-                    break;
-                }
+                std::cout << "[WARNING]: Scan aborted due to std::runtime_error at index " << i << std::endl;
+                std::cout << "         std::runtime_error: " << err_info << std::endl;
+                break;                
             }
         }
         if (!found_device) {

@@ -7,6 +7,7 @@ if [ $HOSTNAME = zhang-capra-xcel.ece.cornell.edu ]; then
     export HLS_INCLUDE=/work/shared/common/CAD_tool/Xilinx/Vitis-2022/Vitis_HLS/2022.1/include
     export LD_LIBRARY_PATH=/work/shared/common/CAD_tool/Xilinx/Vitis-2022/Vitis/2022.1/lib/lnx64.o:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=/work/shared/common/CAD_tool/Xilinx/Vitis-2022/Vitis/2022.1/lib/lnx64.o/Default:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=/work/zhang-capra/common/lib:$LD_LIBRARY_PATH
     export CPATH=/usr/include/x86_64-linux-gnu:$CPATH
 else

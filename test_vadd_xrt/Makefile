@@ -37,7 +37,7 @@ clean:
 	-$(RM) $(EMCONFIG_FILE) $(HOST_EXE) $(XCLBIN)
 
 cleanall: clean
-	rm -rf all_* *.log *.xclbin *.compile_summary *.link_summary *.info *.xo .run .Xil
+	rm -rf all_* *.log *.xclbin *.compile_summary *.link_summary *.info *.xo .run .Xil .ipcache
 	rm -rf ext_metadata.json xsa.xml
 
 # kernel rules
