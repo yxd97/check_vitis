@@ -1,0 +1,980 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x435A44C4E309F914",
+      "device": "xcu280-fsvh2892-2L-e",
+      "gen_directory": "../../../../project_2.gen/sources_1/bd/design_1",
+      "name": "design_1",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2020.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "hbm_0": "",
+      "axi_vip_0": "",
+      "axi_vip_1": "",
+      "clk_wiz": "",
+      "clk_wiz_1": "",
+      "resetn_inv_0": "",
+      "resetn_inv_1": "",
+      "rst_clk_wiz_100M": "",
+      "hbm_traffic_gen_0": "",
+      "axi_protocol_convert_0": ""
+    },
+    "ports": {
+      "clk_100MHz": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "CLK_DOMAIN": {
+            "value": "design_1_clk_100MHz",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.000",
+            "value_src": "default"
+          }
+        }
+      },
+      "resetn": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW"
+          }
+        }
+      },
+      "resetn_0": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_LOW"
+          }
+        }
+      }
+    },
+    "components": {
+      "hbm_0": {
+        "vlnv": "xilinx.com:ip:hbm:1.0",
+        "xci_name": "design_1_hbm_0_0",
+        "xci_path": "ip/design_1_hbm_0_0/design_1_hbm_0_0.xci",
+        "inst_hier_path": "hbm_0",
+        "parameters": {
+          "USER_APB_EN": {
+            "value": "false"
+          },
+          "USER_AXI_ADDR_SIZE": {
+            "value": "32"
+          },
+          "USER_AXI_CLK1_FREQ": {
+            "value": "450"
+          },
+          "USER_AXI_CLK_FREQ": {
+            "value": "450"
+          },
+          "USER_CLK_SEL_LIST0": {
+            "value": "AXI_00_ACLK"
+          },
+          "USER_CLK_SEL_LIST1": {
+            "value": "AXI_16_ACLK"
+          },
+          "USER_CTRL_PHY_MODE": {
+            "value": "Controller_and_Physical_Layer"
+          },
+          "USER_DEBUG_EN": {
+            "value": "TRUE"
+          },
+          "USER_EN_PHY_ONLY": {
+            "value": "FALSE"
+          },
+          "USER_EXAMPLE_TG": {
+            "value": "SYNTHESIZABLE"
+          },
+          "USER_HBM_CP_1": {
+            "value": "3"
+          },
+          "USER_HBM_DENSITY": {
+            "value": "4GB"
+          },
+          "USER_HBM_FBDIV_1": {
+            "value": "5"
+          },
+          "USER_HBM_HEX_CP_RES_1": {
+            "value": "0x0000B300"
+          },
+          "USER_HBM_HEX_FBDIV_CLKOUTDIV_1": {
+            "value": "0x00000142"
+          },
+          "USER_HBM_HEX_LOCK_FB_REF_DLY_1": {
+            "value": "0x00000a0a"
+          },
+          "USER_HBM_LOCK_FB_DLY_1": {
+            "value": "10"
+          },
+          "USER_HBM_LOCK_REF_DLY_1": {
+            "value": "10"
+          },
+          "USER_HBM_RES_1": {
+            "value": "11"
+          },
+          "USER_HBM_STACK": {
+            "value": "1"
+          },
+          "USER_MC0_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC0_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC0_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC0_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC0_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC10_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC10_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC10_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC10_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC10_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC11_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC11_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC11_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC11_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC11_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC12_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC12_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC12_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC12_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC12_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC13_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC13_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC13_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC13_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC13_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC14_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC14_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC14_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC14_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC14_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC15_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC15_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC15_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC15_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC15_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC1_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC1_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC1_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC1_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC1_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC2_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC2_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC2_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC2_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC2_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC3_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC3_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC3_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC3_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC3_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC4_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC4_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC4_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC4_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC4_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC5_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC5_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC5_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC5_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC5_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC6_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC6_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC6_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC6_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC6_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC7_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC7_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC7_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC7_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC7_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC8_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC8_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC8_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC8_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC8_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC9_LOOKAHEAD_ACT": {
+            "value": "false"
+          },
+          "USER_MC9_LOOKAHEAD_PCH": {
+            "value": "false"
+          },
+          "USER_MC9_MAINTAIN_COHERENCY": {
+            "value": "false"
+          },
+          "USER_MC9_REORDER_EN": {
+            "value": "false"
+          },
+          "USER_MC9_REORDER_QUEUE_EN": {
+            "value": "false"
+          },
+          "USER_MC_ENABLE_00": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_01": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_02": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_03": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_04": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_05": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_06": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_07": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_08": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_09": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_10": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_11": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_12": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_13": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_14": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_15": {
+            "value": "FALSE"
+          },
+          "USER_MC_ENABLE_APB_00": {
+            "value": "TRUE"
+          },
+          "USER_MC_ENABLE_APB_01": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_08": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_09": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_10": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_11": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_12": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_13": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_14": {
+            "value": "FALSE"
+          },
+          "USER_PHY_ENABLE_15": {
+            "value": "FALSE"
+          },
+          "USER_SAXI_01": {
+            "value": "false"
+          },
+          "USER_SAXI_02": {
+            "value": "false"
+          },
+          "USER_SAXI_03": {
+            "value": "false"
+          },
+          "USER_SAXI_04": {
+            "value": "false"
+          },
+          "USER_SAXI_05": {
+            "value": "false"
+          },
+          "USER_SAXI_06": {
+            "value": "false"
+          },
+          "USER_SAXI_07": {
+            "value": "false"
+          },
+          "USER_SAXI_08": {
+            "value": "false"
+          },
+          "USER_SAXI_09": {
+            "value": "false"
+          },
+          "USER_SAXI_10": {
+            "value": "false"
+          },
+          "USER_SAXI_11": {
+            "value": "false"
+          },
+          "USER_SAXI_12": {
+            "value": "false"
+          },
+          "USER_SAXI_13": {
+            "value": "false"
+          },
+          "USER_SAXI_14": {
+            "value": "false"
+          },
+          "USER_SAXI_15": {
+            "value": "false"
+          },
+          "USER_SAXI_16": {
+            "value": "false"
+          },
+          "USER_SAXI_17": {
+            "value": "false"
+          },
+          "USER_SAXI_18": {
+            "value": "false"
+          },
+          "USER_SAXI_19": {
+            "value": "false"
+          },
+          "USER_SAXI_20": {
+            "value": "false"
+          },
+          "USER_SAXI_21": {
+            "value": "false"
+          },
+          "USER_SAXI_22": {
+            "value": "false"
+          },
+          "USER_SAXI_23": {
+            "value": "false"
+          },
+          "USER_SAXI_24": {
+            "value": "false"
+          },
+          "USER_SAXI_25": {
+            "value": "false"
+          },
+          "USER_SAXI_26": {
+            "value": "false"
+          },
+          "USER_SAXI_27": {
+            "value": "false"
+          },
+          "USER_SAXI_28": {
+            "value": "false"
+          },
+          "USER_SAXI_29": {
+            "value": "false"
+          },
+          "USER_SAXI_30": {
+            "value": "false"
+          },
+          "USER_SAXI_31": {
+            "value": "false"
+          },
+          "USER_SWITCH_ENABLE_00": {
+            "value": "TRUE"
+          },
+          "USER_tFAW_0": {
+            "value": "0x00F"
+          },
+          "USER_tFAW_1": {
+            "value": "0x00F"
+          },
+          "USER_tRCDRD_0": {
+            "value": "0x0D"
+          },
+          "USER_tRCDRD_1": {
+            "value": "0x0D"
+          },
+          "USER_tRCDWR_0": {
+            "value": "0x09"
+          },
+          "USER_tRCDWR_1": {
+            "value": "0x09"
+          },
+          "USER_tRFC_0": {
+            "value": "0x0EA"
+          },
+          "USER_tRFC_1": {
+            "value": "0x0EA"
+          },
+          "USER_tRP_0": {
+            "value": "0x0D"
+          },
+          "USER_tRP_1": {
+            "value": "0x0D"
+          },
+          "USER_tRRDL_0": {
+            "value": "0x04"
+          },
+          "USER_tRRDL_1": {
+            "value": "0x04"
+          },
+          "USER_tRRDS_0": {
+            "value": "0x04"
+          },
+          "USER_tRRDS_1": {
+            "value": "0x04"
+          },
+          "USER_tWR_0": {
+            "value": "0x0F"
+          },
+          "USER_tWR_1": {
+            "value": "0x0F"
+          },
+          "USER_tXP_0": {
+            "value": "0x07"
+          },
+          "USER_tXP_1": {
+            "value": "0x07"
+          }
+        },
+        "interface_ports": {
+          "SAXI_00": {
+            "mode": "Slave",
+            "memory_map_ref": "SAXI_00"
+          }
+        }
+      },
+      "axi_vip_0": {
+        "vlnv": "xilinx.com:ip:axi_vip:1.1",
+        "xci_name": "design_1_axi_vip_0_1",
+        "xci_path": "ip/design_1_axi_vip_0_1/design_1_axi_vip_0_1.xci",
+        "inst_hier_path": "axi_vip_0",
+        "parameters": {
+          "ADDR_WIDTH": {
+            "value": "32"
+          },
+          "DATA_WIDTH": {
+            "value": "32"
+          },
+          "INTERFACE_MODE": {
+            "value": "SLAVE"
+          },
+          "PROTOCOL": {
+            "value": "AXI4"
+          },
+          "READ_WRITE_MODE": {
+            "value": "READ_WRITE"
+          }
+        }
+      },
+      "axi_vip_1": {
+        "vlnv": "xilinx.com:ip:axi_vip:1.1",
+        "xci_name": "design_1_axi_vip_1_0",
+        "xci_path": "ip/design_1_axi_vip_1_0/design_1_axi_vip_1_0.xci",
+        "inst_hier_path": "axi_vip_1",
+        "interface_ports": {
+          "S_AXI": {
+            "mode": "Slave",
+            "memory_map_ref": "S_AXI",
+            "bridges": [
+              "M_AXI"
+            ]
+          }
+        }
+      },
+      "clk_wiz": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "xci_name": "design_1_clk_wiz_0",
+        "xci_path": "ip/design_1_clk_wiz_0/design_1_clk_wiz_0.xci",
+        "inst_hier_path": "clk_wiz",
+        "parameters": {
+          "RESET_BOARD_INTERFACE": {
+            "value": "resetn"
+          },
+          "USE_BOARD_FLOW": {
+            "value": "true"
+          }
+        }
+      },
+      "clk_wiz_1": {
+        "vlnv": "xilinx.com:ip:clk_wiz:6.0",
+        "xci_name": "design_1_clk_wiz_1_0",
+        "xci_path": "ip/design_1_clk_wiz_1_0/design_1_clk_wiz_1_0.xci",
+        "inst_hier_path": "clk_wiz_1",
+        "parameters": {
+          "RESET_BOARD_INTERFACE": {
+            "value": "resetn"
+          },
+          "USE_BOARD_FLOW": {
+            "value": "true"
+          }
+        }
+      },
+      "resetn_inv_0": {
+        "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
+        "xci_name": "design_1_resetn_inv_0_0",
+        "xci_path": "ip/design_1_resetn_inv_0_0/design_1_resetn_inv_0_0.xci",
+        "inst_hier_path": "resetn_inv_0",
+        "parameters": {
+          "C_OPERATION": {
+            "value": "not"
+          },
+          "C_SIZE": {
+            "value": "1"
+          }
+        }
+      },
+      "resetn_inv_1": {
+        "vlnv": "xilinx.com:ip:util_vector_logic:2.0",
+        "xci_name": "design_1_resetn_inv_1_0",
+        "xci_path": "ip/design_1_resetn_inv_1_0/design_1_resetn_inv_1_0.xci",
+        "inst_hier_path": "resetn_inv_1",
+        "parameters": {
+          "C_OPERATION": {
+            "value": "not"
+          },
+          "C_SIZE": {
+            "value": "1"
+          }
+        }
+      },
+      "rst_clk_wiz_100M": {
+        "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
+        "xci_name": "design_1_rst_clk_wiz_100M_0",
+        "xci_path": "ip/design_1_rst_clk_wiz_100M_0/design_1_rst_clk_wiz_100M_0.xci",
+        "inst_hier_path": "rst_clk_wiz_100M"
+      },
+      "hbm_traffic_gen_0": {
+        "vlnv": "xilinx.com:hls:hbm_traffic_gen:1.0",
+        "xci_name": "design_1_hbm_traffic_gen_0_1",
+        "xci_path": "ip/design_1_hbm_traffic_gen_0_1/design_1_hbm_traffic_gen_0_1.xci",
+        "inst_hier_path": "hbm_traffic_gen_0",
+        "addressing": {
+          "address_spaces": {
+            "Data_m_axi_gmem": {
+              "range": "16E",
+              "width": "64"
+            },
+            "Data_m_axi_cmd": {
+              "range": "16E",
+              "width": "64"
+            }
+          }
+        },
+        "interface_ports": {
+          "m_axi_gmem": {
+            "mode": "Master",
+            "address_space_ref": "Data_m_axi_gmem",
+            "base_address": {
+              "minimum": "0x00000000",
+              "maximum": "0xFFFFFFFFFFFFFFFF",
+              "width": "64"
+            }
+          },
+          "m_axi_cmd": {
+            "mode": "Master",
+            "address_space_ref": "Data_m_axi_cmd",
+            "base_address": {
+              "minimum": "0x00000000",
+              "maximum": "0xFFFFFFFFFFFFFFFF",
+              "width": "64"
+            }
+          }
+        }
+      },
+      "axi_protocol_convert_0": {
+        "vlnv": "xilinx.com:ip:axi_protocol_converter:2.1",
+        "xci_name": "design_1_axi_protocol_convert_0_0",
+        "xci_path": "ip/design_1_axi_protocol_convert_0_0/design_1_axi_protocol_convert_0_0.xci",
+        "inst_hier_path": "axi_protocol_convert_0",
+        "parameters": {
+          "DATA_WIDTH": {
+            "value": "256"
+          },
+          "MI_PROTOCOL": {
+            "value": "AXI3"
+          },
+          "TRANSLATION_MODE": {
+            "value": "2"
+          }
+        },
+        "interface_ports": {
+          "S_AXI": {
+            "mode": "Slave",
+            "bridges": [
+              "M_AXI"
+            ]
+          }
+        }
+      }
+    },
+    "interface_nets": {
+      "hbm_traffic_gen_0_m_axi_gmem": {
+        "interface_ports": [
+          "hbm_traffic_gen_0/m_axi_gmem",
+          "axi_vip_1/S_AXI"
+        ]
+      },
+      "hbm_traffic_gen_0_m_axi_cmd": {
+        "interface_ports": [
+          "hbm_traffic_gen_0/m_axi_cmd",
+          "axi_vip_0/S_AXI"
+        ]
+      },
+      "axi_vip_1_M_AXI": {
+        "interface_ports": [
+          "axi_vip_1/M_AXI",
+          "axi_protocol_convert_0/S_AXI"
+        ]
+      },
+      "axi_protocol_convert_0_M_AXI": {
+        "interface_ports": [
+          "hbm_0/SAXI_00",
+          "axi_protocol_convert_0/M_AXI"
+        ]
+      }
+    },
+    "nets": {
+      "clk_wiz_clk_out1": {
+        "ports": [
+          "clk_wiz/clk_out1",
+          "hbm_0/APB_0_PCLK",
+          "rst_clk_wiz_100M/slowest_sync_clk",
+          "hbm_0/AXI_00_ACLK",
+          "axi_vip_0/aclk",
+          "axi_vip_1/aclk",
+          "hbm_traffic_gen_0/ap_clk",
+          "axi_protocol_convert_0/aclk"
+        ]
+      },
+      "clk_wiz_1_clk_out1": {
+        "ports": [
+          "clk_wiz_1/clk_out1",
+          "hbm_0/HBM_REF_CLK_0"
+        ]
+      },
+      "clk_100MHz_1": {
+        "ports": [
+          "clk_100MHz",
+          "clk_wiz/clk_in1",
+          "clk_wiz_1/clk_in1"
+        ]
+      },
+      "resetn_1": {
+        "ports": [
+          "resetn",
+          "resetn_inv_0/Op1"
+        ]
+      },
+      "resetn_inv_0_Res": {
+        "ports": [
+          "resetn_inv_0/Res",
+          "clk_wiz/reset",
+          "rst_clk_wiz_100M/ext_reset_in"
+        ]
+      },
+      "resetn_0_1": {
+        "ports": [
+          "resetn_0",
+          "resetn_inv_1/Op1"
+        ]
+      },
+      "resetn_inv_1_Res": {
+        "ports": [
+          "resetn_inv_1/Res",
+          "clk_wiz_1/reset"
+        ]
+      },
+      "clk_wiz_locked": {
+        "ports": [
+          "clk_wiz/locked",
+          "rst_clk_wiz_100M/dcm_locked"
+        ]
+      },
+      "rst_clk_wiz_100M_peripheral_aresetn": {
+        "ports": [
+          "rst_clk_wiz_100M/peripheral_aresetn",
+          "axi_vip_0/aresetn",
+          "axi_vip_1/aresetn",
+          "hbm_0/AXI_00_ARESET_N",
+          "hbm_traffic_gen_0/ap_rst_n",
+          "axi_protocol_convert_0/aresetn",
+          "hbm_0/APB_0_PRESET_N"
+        ]
+      }
+    },
+    "addressing": {
+      "/hbm_traffic_gen_0": {
+        "address_spaces": {
+          "Data_m_axi_gmem": {
+            "segments": {
+              "SEG_hbm_0_HBM_MEM00": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM00",
+                "offset": "0x0000000000000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM01": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM01",
+                "offset": "0x0000000010000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM02": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM02",
+                "offset": "0x0000000020000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM03": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM03",
+                "offset": "0x0000000030000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM04": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM04",
+                "offset": "0x0000000040000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM05": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM05",
+                "offset": "0x0000000050000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM06": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM06",
+                "offset": "0x0000000060000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM07": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM07",
+                "offset": "0x0000000070000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM08": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM08",
+                "offset": "0x0000000080000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM09": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM09",
+                "offset": "0x0000000090000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM10": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM10",
+                "offset": "0x00000000A0000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM11": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM11",
+                "offset": "0x00000000B0000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM12": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM12",
+                "offset": "0x00000000C0000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM13": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM13",
+                "offset": "0x00000000D0000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM14": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM14",
+                "offset": "0x00000000E0000000",
+                "range": "256M"
+              },
+              "SEG_hbm_0_HBM_MEM15": {
+                "address_block": "/hbm_0/SAXI_00/HBM_MEM15",
+                "offset": "0x00000000F0000000",
+                "range": "256M"
+              }
+            }
+          },
+          "Data_m_axi_cmd": {
+            "segments": {
+              "SEG_axi_vip_0_Reg": {
+                "address_block": "/axi_vip_0/S_AXI/Reg",
+                "offset": "0x0000000044A00000",
+                "range": "4K"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xd:acceleratorMap xmlns:xd="http://www.xilinx.com/xidane" xd:functionName="hbm_traffic_gen" xd:componentRef="hbm_traffic_gen" xd:initiationInterval="x" xd:clockPeriod="3.330" xd:sequential="true" xd:hostMachine="64" xd:reset="control">
+  <xd:arg xd:name="*(hbm)" xd:originalName="hbm" xd:direction="inout" xd:interfaceRef="m_axi_gmem" xd:busTypeRef="aximm" xd:dataWidth="1" xd:bufferDirection="inout"/>
+  <xd:arg xd:name="*(cmd_buf)" xd:originalName="cmd_buf" xd:direction="inout" xd:interfaceRef="m_axi_cmd" xd:busTypeRef="aximm" xd:dataWidth="1" xd:bufferDirection="inout"/>
+  <xd:latencyEstimates xd:best-case="undef" xd:worst-case="undef" xd:average-case="undef"/>
+  <xd:resourceEstimates xd:LUT="9667" xd:FF="12023" xd:BRAM="18" xd:DSP="0"/>
+</xd:acceleratorMap>

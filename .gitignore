@@ -7,6 +7,7 @@
 *.log
 all_builds
 all_logs
+*.prj
 emconfig.json
 .Xil
 .run
@@ -15,3 +16,6 @@ ext_metadata.json
 xsa.xml
 *.hw.ltx
 .vscode
+axi_vip_0_ex
+test_axi_DUFT_1.1
+*.jou
